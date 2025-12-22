@@ -18,8 +18,8 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: '/',
-        start_url: '/',
+        scope: '/calendar-pwa/',
+        start_url: '/calendar-pwa/',
         orientation: 'portrait',
         icons: [
           {
