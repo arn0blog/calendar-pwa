@@ -5,7 +5,7 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/calendar-pwa/',
+  base: '/',
   plugins: [
     react(),
     VitePWA({
@@ -18,8 +18,8 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: '/calendar-pwa/',
-        start_url: '/calendar-pwa/',
+        scope: '/',
+        start_url: '/',
         orientation: 'portrait',
         icons: [
           {
