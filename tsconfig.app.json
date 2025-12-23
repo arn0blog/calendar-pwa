@@ -25,4 +25,5 @@
     "noUncheckedSideEffectImports": true
   },
   "include": ["src"]
+  // "exclude": ["src/components/tools/ProData.tsx"] // Reverting this change
 }

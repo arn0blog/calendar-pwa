@@ -1,16 +1,82 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { CalendarDay } from '../types';
 
 interface CalendarGridProps {
   days: CalendarDay[];
   onDayClick: (day: CalendarDay) => void;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
 }
 
 const WEEKDAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+const COOLDOWN_TIME = 500; // milliseconds
+const SWIPE_THRESHOLD = 50; // pixels
 
-const CalendarGrid: React.FC<CalendarGridProps> = ({ days, onDayClick }) => {
+const CalendarGrid: React.FC<CalendarGridProps> = ({
+  days,
+  onDayClick,
+  onPrevMonth,
+  onNextMonth,
+}) => {
+  const [lastActionTime, setLastActionTime] = useState(0);
+  const touchStartY = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null); // Create a ref for the container
+
+  const handleAction = (action: () => void) => {
+    const now = Date.now();
+    if (now - lastActionTime < COOLDOWN_TIME) {
+      return; // Ignore action during cooldown
+    }
+    action();
+    setLastActionTime(now);
+  };
+
+  // Modified handleWheel to accept native WheelEvent
+  const handleWheel = (e: WheelEvent) => {
+    e.preventDefault(); // Prevent page scrolling
+    if (e.deltaY > 0) {
+      handleAction(onNextMonth);
+    } else if (e.deltaY < 0) {
+      handleAction(onPrevMonth);
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaY = touchEndY - touchStartY.current;
+
+    if (deltaY > SWIPE_THRESHOLD) {
+      // Swiped down (Prev Month)
+      handleAction(onPrevMonth);
+    } else if (deltaY < -SWIPE_THRESHOLD) {
+      // Swiped up (Next Month)
+      handleAction(onNextMonth);
+    }
+  };
+
+  // useEffect to manually attach wheel event listener
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false });
+      return () => {
+        container.removeEventListener('wheel', handleWheel);
+      };
+    }
+  }, [handleWheel]); // Depend on handleWheel to ensure latest version is used
+
   return (
-    <div className="w-full bg-white dark:bg-zinc-900 rounded-3xl shadow-lg p-4 transition-all">
+    <div
+      ref={containerRef} // Attach the ref to the container div
+      className="w-full bg-white dark:bg-zinc-900 rounded-3xl shadow-lg p-4 transition-all duration-300 ease-in-out touch-none" // Added touch-none
+      // Removed onWheel prop from here
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Weekday Headers */}
       <div className="grid grid-cols-7 mb-2">
         {WEEKDAYS.map((day, index) => (

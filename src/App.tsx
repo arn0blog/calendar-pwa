@@ -57,6 +57,8 @@ function App() {
         <CalendarGrid 
           days={days} 
           onDayClick={handleDayClick}
+          onPrevMonth={handlePrevMonth} // Pass handler for prev month scroll/swipe
+          onNextMonth={handleNextMonth} // Pass handler for next month scroll/swipe
         />
       </main>
 
