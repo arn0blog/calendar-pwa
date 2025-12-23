@@ -7,11 +7,10 @@ const ReloadPrompt: React.FC = () => {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
-    onRegistered(r: any) {
-      // eslint-disable-next-line prefer-template
+    onRegistered(r: unknown) {
       console.log('SW Registered: ' + r)
     },
-    onRegisterError(error: any) {
+    onRegisterError(error: unknown) {
       console.log('SW registration error', error)
     },
   })
