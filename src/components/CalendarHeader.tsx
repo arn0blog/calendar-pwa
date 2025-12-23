@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Settings } from 'lucide-react'; // Import Settings icon
 
 interface CalendarHeaderProps {
   year: number;
@@ -8,6 +8,7 @@ interface CalendarHeaderProps {
   onNextMonth: () => void;
   onYearChange: (year: number) => void;
   onMonthChange: (month: number) => void;
+  onShowToolsModal: () => void; // New prop for showing tools modal
 }
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
@@ -17,9 +18,11 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   onNextMonth,
   onYearChange,
   onMonthChange,
+  onShowToolsModal, // Destructure new prop
 }) => {
   return (
     <div className="flex items-center justify-between px-4 py-4 bg-white dark:bg-zinc-900 border-b border-gray-100 dark:border-zinc-800">
+      {/* Left controls (Prev Month button) */}
       <button 
         onClick={onPrevMonth}
         className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-gray-600 dark:text-gray-300"
@@ -28,6 +31,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
         <ChevronLeft className="w-6 h-6" />
       </button>
 
+      {/* Center controls (Year and Month selectors) */}
       <div className="flex items-center gap-2">
         <select 
           value={year}
@@ -50,13 +54,24 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
         </select>
       </div>
 
-      <button 
-        onClick={onNextMonth}
-        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-gray-600 dark:text-gray-300"
-        aria-label="Next month"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+      {/* Right controls (Next Month button and Tools button) */}
+      <div className="flex items-center gap-2"> {/* New div to group buttons */}
+        <button 
+          onClick={onNextMonth}
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-gray-600 dark:text-gray-300"
+          aria-label="Next month"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+        
+        <button 
+          onClick={onShowToolsModal} // Attach handler for Tools Modal
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-gray-600 dark:text-gray-300"
+          aria-label="Open tools"
+        >
+          <Settings className="w-6 h-6" /> {/* Tools icon */}
+        </button>
+      </div>
     </div>
   );
 };

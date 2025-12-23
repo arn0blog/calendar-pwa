@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { SolarDay } from 'tyme4ts';
+import { SolarDay } from 'tyme4ts'; // Removed LunarDay from import
 import type { CalendarDay } from '../types';
 
 export const useCalendar = (year: number, month: number) => {
@@ -29,13 +29,12 @@ export const useCalendar = (year: number, month: number) => {
           const currentD = currentDate.getDate();
 
           // Tyme4ts initialization
-          // Using SolarDay as verified in d.ts. If runtime fails, check console.
           const solar = SolarDay.fromYmd(currentY, currentM, currentD);
-          const lunar = solar.getLunarDay();
-          
+          const lunar = solar.getLunarDay(); // This is the LunarDay object
+
           let termName: string | null = null;
           const term = solar.getTerm();
-          if (term.getJulianDay().getDay() === solar.getJulianDay().getDay()) {
+          if (term && term.getJulianDay().getDay() === solar.getJulianDay().getDay()) {
              termName = term.getName();
           }
 
@@ -71,7 +70,8 @@ export const useCalendar = (year: number, month: number) => {
             term: termName,
             festivals,
             isHoliday,
-            isWorkDay
+            isWorkDay,
+            lunar: lunar, // Populate the full LunarDay object
           });
         }
         

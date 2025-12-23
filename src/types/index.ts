@@ -1,3 +1,5 @@
+import { LunarDay } from 'tyme4ts';
+
 export interface CalendarDay {
   date: Date;
   year: number;
@@ -12,4 +14,5 @@ export interface CalendarDay {
   festivals: string[];   // Combined list of Solar/Lunar festivals
   isWorkDay?: boolean;   // For legal holidays
   isHoliday?: boolean;   // For legal holidays
+  lunar: LunarDay;       // Add the full LunarDay object
 }
