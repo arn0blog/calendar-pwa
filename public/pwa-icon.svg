@@ -1,0 +1,8 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="100" fill="#E63946"/>
+  <rect x="80" y="120" width="352" height="312" rx="20" fill="white"/>
+  <rect x="80" y="120" width="352" height="80" rx="20 20 0 0" fill="#B21E2B"/>
+  <text x="256" y="360" font-family="sans-serif" font-size="180" font-weight="bold" fill="#E63946" text-anchor="middle" dominant-baseline="middle">历</text>
+  <circle cx="150" cy="160" r="15" fill="white"/>
+  <circle cx="362" cy="160" r="15" fill="white"/>
+</svg>

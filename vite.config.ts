@@ -10,11 +10,11 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      includeAssets: ['pwa-icon.svg', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'TimeFlow Calendar',
-        short_name: 'TimeFlow',
-        description: 'A Perpetual Calendar PWA with Lunar dates and Festivals',
+        name: '万年历',
+        short_name: '万年历',
+        description: '一款优雅的现代万年历 (A generic modern perpetual calendar)',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
@@ -23,16 +23,10 @@ export default defineConfig({
         orientation: 'portrait',
         icons: [
           {
-            src: 'pwa-icons/icon-192.svg',
-            sizes: '192x192',
-            type: 'image/svg+xml',
-            purpose: 'any maskable'
-          },
-          {
-            src: 'pwa-icons/icon-512.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'any maskable'
+            "src": "pwa-icon.svg",
+            "sizes": "192x192 512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
           }
         ]
       },
