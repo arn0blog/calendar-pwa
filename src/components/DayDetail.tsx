@@ -67,130 +67,135 @@ const DayDetail: React.FC<DayDetailProps> = ({ day, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-t-3xl p-6 pb-10 shadow-xl animate-in slide-in-from-bottom duration-300 overflow-y-auto max-h-[90vh]"
+        className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-t-3xl p-6 pb-12 shadow-2xl animate-in slide-in-from-bottom duration-300 overflow-y-auto max-h-[95vh]"
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-2 bg-gray-300 dark:bg-zinc-700 rounded-full" />
+        <div className="flex justify-center mb-6">
+          <div className="w-20 h-2 bg-gray-400 dark:bg-zinc-600 rounded-full" />
         </div>
 
         {/* Header Section */}
-        <div className="text-center mb-6">
-          <p className="text-gray-600 dark:text-gray-400 text-base mb-1">
+        <div className="text-center mb-8 space-y-2">
+          <p className="text-gray-900 dark:text-gray-100 text-lg font-bold">
             {solarDateDisplay}
           </p>
-          <h2 className="text-red-600 dark:text-red-500 text-4xl font-bold mb-1">
-            {lunarDateDisplay}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            {ganZhiDisplay}
-          </p>
+          <div className="flex items-center justify-center gap-4">
+             <span className="text-red-600 dark:text-red-500 text-7xl font-black">{day.day}</span>
+             <div className="text-left">
+                <h2 className="text-red-600 dark:text-red-500 text-3xl font-black leading-tight">
+                  {lunarDateDisplay}
+                </h2>
+                <p className="text-gray-900 dark:text-gray-100 text-lg font-bold">
+                  {ganZhiDisplay}
+                </p>
+             </div>
+          </div>
         </div>
 
         {/* Activities Section (Yi & Ji) */}
-        <div className="flex gap-4 mb-6">
-          <div className="flex-1 p-3 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50 dark:bg-blue-900/10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-6 h-6 flex items-center justify-center bg-blue-500 text-white rounded-full text-xs font-bold">宜</span>
-              <h3 className="font-semibold text-blue-700 dark:text-blue-400">宜事</h3>
+        <div className="flex flex-col gap-5 mb-8">
+          <div className="p-4 rounded-xl border-2 border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 shadow-sm">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-10 h-10 flex items-center justify-center bg-blue-600 text-white rounded-full text-xl font-black shadow-md">宜</span>
+              <h3 className="text-2xl font-black text-blue-800 dark:text-blue-300">宜事</h3>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
-              {recommends.length > 0 ? recommends.join('、') : '诸事皆宜'}
+            <p className="text-xl font-bold text-gray-900 dark:text-gray-50 leading-relaxed tracking-wide">
+              {recommends.length > 0 ? recommends.join(' · ') : '诸事皆宜'}
             </p>
           </div>
 
-          <div className="flex-1 p-3 rounded-lg border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-900/10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-6 h-6 flex items-center justify-center bg-red-500 text-white rounded-full text-xs font-bold">忌</span>
-              <h3 className="font-semibold text-red-700 dark:text-red-400">忌事</h3>
+          <div className="p-4 rounded-xl border-2 border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-900/20 shadow-sm">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full text-xl font-black shadow-md">忌</span>
+              <h3 className="text-2xl font-black text-red-800 dark:text-red-300">忌事</h3>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
-              {avoids.length > 0 ? avoids.join('、') : '无所禁忌'}
+            <p className="text-xl font-bold text-gray-900 dark:text-gray-50 leading-relaxed tracking-wide">
+              {avoids.length > 0 ? avoids.join(' · ') : '无所禁忌'}
             </p>
           </div>
         </div>
 
         {/* Info Grid */}
-        <div className="border border-amber-200 dark:border-amber-700 rounded-lg overflow-hidden text-gray-800 dark:text-gray-100 mb-6">
+        <div className="border-2 border-amber-300 dark:border-amber-700 rounded-xl overflow-hidden text-gray-900 dark:text-gray-50 mb-8 shadow-sm">
           {/* Row 1 */}
-          <div className="grid grid-cols-3 border-b border-amber-200 dark:border-amber-700">
-            <div className="p-3 border-r border-amber-200 dark:border-amber-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">纳音</p>
-              <p className="text-base font-medium">{naYin || '未知'}</p>
+          <div className="grid grid-cols-3 border-b-2 border-amber-300 dark:border-amber-700 bg-amber-50/30 dark:bg-zinc-800/50">
+            <div className="p-4 border-r-2 border-amber-300 dark:border-amber-700 text-center">
+              <p className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-1">纳音</p>
+              <p className="text-lg font-black">{naYin || '未知'}</p>
             </div>
-            <div className="p-3 border-r border-amber-200 dark:border-amber-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">冲煞</p>
-              <p className="text-base font-medium">{chongSha || '未知'}</p>
+            <div className="p-4 border-r-2 border-amber-300 dark:border-amber-700 text-center">
+              <p className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-1">冲煞</p>
+              <p className="text-lg font-black">{chongSha || '未知'}</p>
             </div>
-            <div className="p-3">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">值神</p>
-              <p className="text-base font-medium">{zhiShen || '未知'}</p>
+            <div className="p-4 text-center">
+              <p className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-1">值神</p>
+              <p className="text-lg font-black">{zhiShen || '未知'}</p>
             </div>
           </div>
 
           {/* Row 2: Hourly Luck */}
-          <div className="grid grid-cols-[auto_1fr] border-b border-amber-200 dark:border-amber-700">
-            <div className="p-3 flex items-center justify-center border-r border-amber-200 dark:border-amber-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 [writing-mode:vertical-lr] tracking-wide">时辰吉凶</p>
+          <div className="grid grid-cols-[auto_1fr] border-b-2 border-amber-300 dark:border-amber-700">
+            <div className="p-4 flex items-center justify-center border-r-2 border-amber-300 dark:border-amber-700 bg-amber-100/50 dark:bg-zinc-800">
+              <p className="text-sm font-black text-amber-900 dark:text-amber-200 [writing-mode:vertical-lr] tracking-widest py-2">时辰吉凶</p>
             </div>
-            <div className="grid grid-cols-4 gap-x-2 gap-y-1 p-2">
+            <div className="grid grid-cols-4 gap-2 p-3 bg-white dark:bg-zinc-900">
               {hourlyLuckData.map((hour, i) => (
-                <div key={i} className="text-center text-sm">
-                  <p className="font-medium text-amber-800 dark:text-amber-300">{hour.branch}</p>
-                  <p className={`text-xs ${hour.luck === '吉' ? 'text-green-600' : 'text-red-600'}`}>{hour.luck}</p>
+                <div key={i} className="text-center py-1">
+                  <p className="text-lg font-black text-amber-800 dark:text-amber-400 leading-tight">{hour.branch}</p>
+                  <p className={`text-base font-black ${hour.luck === '吉' ? 'text-green-700 dark:text-green-500' : 'text-red-700 dark:text-red-500'}`}>{hour.luck}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Row 3: Gods & Positions */}
-          <div className="grid grid-cols-[auto_1fr_auto] border-b border-amber-200 dark:border-amber-700">
+          <div className="grid grid-cols-[auto_1fr_auto] border-b-2 border-amber-300 dark:border-amber-700">
             {/* JianChu */}
-            <div className="p-3 flex items-center justify-center border-r border-amber-200 dark:border-amber-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 [writing-mode:vertical-lr] tracking-wide">建除十二神</p>
-              <p className="text-lg font-bold text-amber-800 dark:text-amber-300 ml-2">{jianChu || '未知'}</p>
+            <div className="p-4 flex items-center justify-center border-r-2 border-amber-300 dark:border-amber-700 bg-amber-50/50 dark:bg-zinc-800/30">
+              <p className="text-sm font-bold text-gray-600 dark:text-gray-400 [writing-mode:vertical-lr] tracking-wide mb-2">十二神</p>
+              <p className="text-3xl font-black text-amber-900 dark:text-amber-200 ml-1">{jianChu || '未知'}</p>
             </div>
 
             {/* Middle Area (Gods) */}
-            <div className="p-3 border-r border-amber-200 dark:border-amber-700 flex flex-col justify-center">
-              <div className="mb-2">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">吉神宜趋</p>
-                <p className="text-sm font-medium text-green-600 dark:text-green-400">{goodGods || '无'}</p>
-              </div>
-              <div className="mb-2">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">今日胎神</p>
-                <p className="text-sm font-medium text-amber-800 dark:text-amber-300">{fetusGod || '未知'}</p>
+            <div className="p-4 border-r-2 border-amber-300 dark:border-amber-700 flex flex-col justify-center space-y-4 bg-white dark:bg-zinc-900">
+              <div>
+                <p className="text-sm font-bold text-gray-500 dark:text-gray-400 mb-1">吉神宜趋</p>
+                <p className="text-lg font-black text-green-700 dark:text-green-400 leading-snug">{goodGods || '无'}</p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">凶神宜忌</p>
-                <p className="text-sm font-medium text-red-600 dark:text-red-400">{badGods || '无'}</p>
+                <p className="text-sm font-bold text-gray-500 dark:text-gray-400 mb-1">今日胎神</p>
+                <p className="text-lg font-black text-amber-900 dark:text-amber-300 leading-snug">{fetusGod || '未知'}</p>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-gray-500 dark:text-gray-400 mb-1">凶神宜忌</p>
+                <p className="text-lg font-black text-red-700 dark:text-red-400 leading-snug">{badGods || '无'}</p>
               </div>
             </div>
 
             {/* 28 Stars */}
-            <div className="p-3 flex items-center justify-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 [writing-mode:vertical-lr] tracking-wide">二十八星宿</p>
-              <p className="text-lg font-bold text-amber-800 dark:text-amber-300 ml-2">{twentyEightStars || '未知'}</p>
+            <div className="p-4 flex items-center justify-center bg-amber-50/50 dark:bg-zinc-800/30">
+              <p className="text-sm font-bold text-gray-600 dark:text-gray-400 [writing-mode:vertical-lr] tracking-wide mb-2">廿八星宿</p>
+              <p className="text-2xl font-black text-amber-900 dark:text-amber-200 ml-1">{twentyEightStars.substring(0, 1)}</p>
             </div>
           </div>
 
           {/* Row 4: PengZu */}
-          <div className="p-3 text-center">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">彭祖百忌</p>
-            <p className="text-base font-medium">{pengZuGan || '未知'}</p>
-            <p className="text-base font-medium">{pengZuZhi || '未知'}</p>
+          <div className="p-5 text-center bg-amber-50/20 dark:bg-zinc-800/40">
+            <p className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">彭祖百忌</p>
+            <p className="text-xl font-black mb-1">{pengZuGan || '未知'}</p>
+            <p className="text-xl font-black">{pengZuZhi || '未知'}</p>
           </div>
         </div>
 
         <button
           onClick={onClose}
-          className="w-full mt-8 py-3 bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+          className="w-full mt-4 py-5 bg-gray-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-2xl text-2xl font-black shadow-lg hover:bg-black dark:hover:bg-white transition-all active:scale-95"
         >
-          关闭
+          我知道了
         </button>
       </div>
     </div>
